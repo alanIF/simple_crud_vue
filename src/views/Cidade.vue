@@ -15,25 +15,43 @@
         <td>{{cidade.latitude}}</td>
 
         <td>{{cidade.longitude}}</td>
-        <td> <button class="btn btn-info" @click="atualizarCidade(cidade.id)">Atualizar</button> <button class="btn btn-danger" @click="deleteCidade(cidade.id)">delete</button></td>
+        <td> <button class="btn btn-info" @click="atualizarCidade(cidade.id)"><i class="fa fa-pencil"></i></button> <button class="btn btn-danger" @click="deleteCidade(cidade.id)"><i class="fa fa-trash"></i></button></td>
 
      </tr>
     </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="1"><button class="btn btn-primary" @click="add()"><i class="fa fa-plus"></i></button></td>
+            <td colspan="4"></td>
+
+        </tr>
+    </tfoot>
   </table>
 
     </div>
-   
-   
+   <div v-if="addVisible">
+       <addCidade />
+   </div>
+      
 </template>
 
 <script>
+  import addCidade from '../components/cidade/addCidade.vue'
+  import editCidade from '../components/cidade/editCidade.vue'
+
   export default {
 
  name: "Cidade",
     data() {
       return {
-        cidades: null
+        cidades: null,
+        addVisible:false,
+        editVisible:false
       }
+    },
+    components:{
+        addCidade,
+        editCidade
     },
     methods: {
       async getCidades() {
@@ -49,7 +67,12 @@
         const res = await req.json()
         location.reload();
 
+      },
+      add(){
+          this.addVisible=true;
+          this.edit=false;
       }
+    
     },
      mounted () {
         this.getCidades()
