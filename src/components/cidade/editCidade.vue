@@ -5,7 +5,6 @@
         </div>
           <div class="card-body">
 
-        <form method="POST" @submit="createCidade" >
                 <div class="form-group">
                     <input type="text" class="form-control" name="nome" v-model="nome" placeholder="Nome" >
                 </div>
@@ -16,8 +15,7 @@
                     <input type="number" class="form-control" name="longitude" v-model="longitude"   placeholder="Longitude" >
                 </div>
 
-                <button type="submit" class="btn btn-primary">Atualizar</button>
-        </form>
+                <button type="submit"   @click="updateCidade()"  class="btn btn-primary">Atualizar</button>
           </div>
     </div>
 </template>
@@ -43,35 +41,26 @@ export default {
         this.latitude= this.cidade.cords.latitude;
         this.longitude= this.cidade.cords.longitude;
     },
-    async createCidade(e) {
-      e.preventDefault()
-      const data = {
-        nome: this.nome,
-        latitude: this.latitude,
+    
+    async updateCidade() {
+        const data = {
+            id: this.cidade.id,
+            nome: this.nome,
+            latitude: this.latitude,
 
-        longitude:this.longitude
-        
+            longitude:this.longitude
+        }
+        const dataJson = JSON.stringify(data)    
+        const req = await fetch(`http://127.0.0.1:8000/api/cidade/update/${this.cidade.id}`, {
+          method: "PUT",
+          headers: { "Content-Type" : "application/json" },
+          body: dataJson
+        });
+        const res = await req.json()
+        console.log(res)
       }
-      const dataJson = JSON.stringify(data)    
-      const req = await fetch("http://127.0.0.1:8000/api/cidade/store", {
-        method: "POST",
-        headers: { "Content-Type" : "application/json" },
-        body: dataJson
-      });
-      const res = await req.json()
-      console.log(res)
-      msg = "Cidade criada com sucesso!"
-      // clear message
-      setTimeout(() => this.msg = "", 3000)
-      // limpar campos
-      this.nome = ""
-      this.latitude = ""
-      this.longitude = ""
-      location.reload();
-
-      
-    }
-  },
+    },
+  
   mounted(){
       this.getCidade(this.id);
   }
