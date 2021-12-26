@@ -1,5 +1,10 @@
 <template>
-    <div>
+    <div class="card bg-primary text-white">
+         <div class="card-header">
+           <b>Adicionar Cidade</b>
+        </div>
+          <div class="card-body">
+
         <form method="POST" @submit="createCidade" >
                 <div class="form-group">
                     <input type="text" class="form-control" name="nome" v-model="nome" placeholder="Nome" >
@@ -11,8 +16,9 @@
                     <input type="number" class="form-control" name="longitude" v-model="longitude"   placeholder="Longitude" >
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Adicionar</button>
         </form>
+          </div>
     </div>
 </template>
 
@@ -52,7 +58,7 @@ export default {
       this.nome = ""
       this.latitude = ""
       this.longitude = ""
-    location.reload();
+      location.reload();
 
       
     }

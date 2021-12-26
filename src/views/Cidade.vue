@@ -15,7 +15,7 @@
         <td>{{cidade.latitude}}</td>
 
         <td>{{cidade.longitude}}</td>
-        <td> <button class="btn btn-info" @click="atualizarCidade(cidade.id)"><i class="fa fa-pencil"></i></button> <button class="btn btn-danger" @click="deleteCidade(cidade.id)"><i class="fa fa-trash"></i></button></td>
+        <td> <button class="btn btn-info" @click="edit(cidade.id)"><i class="fa fa-pencil"></i></button> <button class="btn btn-danger" @click="deleteCidade(cidade.id)"><i class="fa fa-trash"></i></button></td>
 
      </tr>
     </tbody>
@@ -32,6 +32,11 @@
    <div v-if="addVisible">
        <addCidade />
    </div>
+   
+   <div v-if="editVisible">
+       <editCidade :id="idCidade" />
+
+   </div>
       
 </template>
 
@@ -46,7 +51,8 @@
       return {
         cidades: null,
         addVisible:false,
-        editVisible:false
+        editVisible:false,
+        idCidade:null
       }
     },
     components:{
@@ -70,7 +76,12 @@
       },
       add(){
           this.addVisible=true;
-          this.edit=false;
+          this.editVisible=false;
+      },
+      edit(id){
+          this.addVisible=false;
+          this.editVisible=true;
+          this.idCidade=id;
       }
     
     },
