@@ -29,7 +29,7 @@ export default {
     return {
       nome: null,
       latitude: null,
-      longitude: null,
+      longitude: null
      }
   },
   methods: {
@@ -49,17 +49,14 @@ export default {
         headers: { "Content-Type" : "application/json" },
         body: dataJson
       });
-      const res = await req.json()
-      console.log(res)
-      msg = "Cidade criada com sucesso!"
-      // clear message
-      setTimeout(() => this.msg = "", 3000)
-      // limpar campos
+     
+
+      
       this.nome = ""
       this.latitude = ""
       this.longitude = ""
       location.reload();
-
+  
       
     }
   }

@@ -28,7 +28,7 @@ export default {
       cidade:null,
       nome: null,
       latitude: null,
-      longitude: null,
+      longitude: null
      }
   },
   methods: {
@@ -58,6 +58,8 @@ export default {
         });
         const res = await req.json()
         console.log(res)
+        location.reload()
+
       }
     },
   
