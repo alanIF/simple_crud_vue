@@ -1,12 +1,13 @@
 <template>
     <div>
-     <table class="table table-hover" >
+     <table id="tabela" class="table table-hover tabela" style="width: 100%" >
     <thead>
       <tr>
         <th>Nome</th>
         <th>Latidude</th>
         <th>Longitude</th>
         <th>Ações</th>
+     
         </tr>
     </thead>
     <tbody>
@@ -15,7 +16,7 @@
         <td>{{cidade.latitude}}</td>
 
         <td>{{cidade.longitude}}</td>
-        <td> <button class="btn btn-info" @click="edit(cidade.id)"><i class="fa fa-pencil"></i></button> <button class="btn btn-danger" @click="deleteCidade(cidade.id)"><i class="fa fa-trash"></i></button></td>
+        <td >  <button class="btn btn-info" @click="edit(cidade.id)"><i class="fa fa-pencil"></i></button> <button class="btn btn-danger" @click="deleteCidade(cidade.id)"><i class="fa fa-trash"></i></button></td>
 
      </tr>
     </tbody>
