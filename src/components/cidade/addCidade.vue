@@ -55,6 +55,8 @@ export default {
       this.nome = ""
       this.latitude = ""
       this.longitude = ""
+      alert("Cidade adicionada com sucesso!")
+
       location.reload();
   
       

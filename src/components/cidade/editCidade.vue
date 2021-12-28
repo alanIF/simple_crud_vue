@@ -58,6 +58,7 @@ export default {
         });
         const res = await req.json()
         console.log(res)
+        alert("Cidade atualizada com sucesso!")
         location.reload()
 
       }
