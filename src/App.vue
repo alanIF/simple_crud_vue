@@ -1,5 +1,5 @@
 <template>
-  
+  <div>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <a class="navbar-brand" href="#">SGP</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -9,6 +9,8 @@
     <ul class="navbar-nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/cidades">Cidades</router-link>
+            <router-link to="/postos">Postos</router-link>
+
     </ul>
   </div>  
 </nav>
@@ -27,7 +29,7 @@
   <p>Desenvolvido por : Alan Tavares</p>
 </div>
 
-
+  </div>
 
 
 </template>

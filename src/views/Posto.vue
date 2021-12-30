@@ -3,7 +3,7 @@
      <table id="tabela" class="table table-hover tabela" style="width: 100%" >
     <thead>
       <tr>
-        <th>Nome</th>
+        <th>Reservatorio</th>
         <th>Latidude</th>
         <th>Longitude</th>
         <th>Ações</th>
@@ -11,12 +11,12 @@
         </tr>
     </thead>
     <tbody>
-     <tr v-for="cidade in cidades" :key="cidade.id">
-         <td>{{cidade.nome}}</td>
-        <td>{{cidade.latitude}}</td>
+     <tr v-for="posto in postos" :key="posto.id">
+         <td>{{posto.reservatorio}}</td>
+        <td>{{posto.latitude}}</td>
 
-        <td>{{cidade.longitude}}</td>
-        <td >  <button class="btn btn-info" @click="edit(cidade.id)"><i class="fa fa-pencil"></i></button> <button class="btn btn-danger" @click="deleteCidade(cidade.id)"><i class="fa fa-trash"></i></button></td>
+        <td>{{posto.longitude}}</td>
+        <td >  <button class="btn btn-info" @click="edit(posto.id)"><i class="fa fa-pencil"></i></button> <button class="btn btn-danger" @click="deletePosto(posto.id)"><i class="fa fa-trash"></i></button></td>
 
      </tr>
     </tbody>
@@ -30,64 +30,46 @@
   </table>
 
     </div>
-   <div v-if="addVisible">
-       <addCidade />
-   </div>
    
-   <div v-if="editVisible">
-       <editCidade :id="idCidade" />
-
-   </div>
       
 </template>
 
 <script>
-  import addCidade from '../components/cidade/addCidade.vue'
-  import editCidade from '../components/cidade/editCidade.vue'
+
 
   export default {
 
- name: "Cidade",
+ name: "Posto",
     data() {
       return {
-        cidades: null,
-        addVisible:false,
-        editVisible:false,
-        idCidade:null
+        postos: null,
+        
+        idPosto:null
       }
     },
     components:{
-        addCidade,
-        editCidade
+        
     },
     methods: {
-      async getCidades() {
-        const req = await fetch('http://127.0.0.1:8000/api/cidade/');
+      async getPostos() {
+        const req = await fetch('http://127.0.0.1:8000/api/posto/');
         const data = await req.json();
-        this.cidades = data.data;
+        this.postos = data.data;
       },
       
-      async deleteCidade(id) {
-        const req = await fetch(`http://127.0.0.1:8000/api/cidade/delete/${id}`, {
+      async deletePosto(id) {
+        const req = await fetch(`http://127.0.0.1:8000/api/posto/delete/${id}`, {
           method: "DELETE"
         });
         const res = await req.json()
         location.reload();
 
       },
-      add(){
-          this.addVisible=true;
-          this.editVisible=false;
-      },
-      edit(id){
-          this.addVisible=false;
-          this.editVisible=true;
-          this.idCidade=id;
-      }
+     
     
     },
      mounted () {
-        this.getCidades()
+        this.getPostos()
     }
   }
 </script>
